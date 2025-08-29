@@ -1,10 +1,17 @@
 import gradio as gr
 
+def generate_fake_image(prompt, seed, initial_image=None):
+    return f"Used seed: {seed}", "https://dummyimage.com/300/09f.png"
 
-def greet(name):
-    return "Hello " + name + "!"
+demo = gr.Interface(
+    generate_fake_image,
+    inputs=["textbox"],
+    outputs=["textbox", "image"],
+    additional_inputs=[
+        gr.Slider(0, 1000),
+        "image"
+    ]
+)
 
+demo.launch()
 
-demo = gr.Interface(fn=greet, inputs="textbox", outputs="textbox")
-
-demo.launch(share=True)  # Share your demo with just 1 extra parameter 🚀
